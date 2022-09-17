@@ -1,0 +1,36 @@
+// layout-container component
+@import "../../../assets/styles/reset.scss";
+
+:host {
+  --layout-container-margin-sm: var(--spacer-sm); //8px
+  --layout-container-margin-md: var(--spacer-md); //16px
+  --layout-container-margin-lg: var(--spacer-lg); //24px
+  --layout-container-margin-xl: var(--spacer-xl); //32px
+}
+
+.layout-container {
+  &--gutter-none {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  &--gutter-small {
+    margin-left: var(--layout-container-margin-sm);
+    margin-right: var(--layout-container-margin-sm);
+  }
+
+  &--gutter-medium {
+    margin-left: var(--layout-container-margin-md);
+    margin-right: var(--layout-container-margin-md);
+  }
+
+  &--gutter-large {
+    margin-left: var(--layout-container-margin-lg);
+    margin-right: var(--layout-container-margin-lg);
+  }
+
+  &--gutter-xlarge {
+    margin-left: var(--layout-container-margin-xl);
+    margin-right: var(--layout-container-margin-xl);
+  }
+}

@@ -1,0 +1,27 @@
+@import "../../../assets/styles/reset.scss";
+:host {
+  --button-background-color: var(--yellow-color-100);
+  --button-width: 100%;
+  --button-height: 56px;
+  --button-color: var(--black-color);
+  --button-font-size: var(--font-size-sm);
+
+  --button-padding: var(--padding-base);
+  --button-radius: var(--border-radius-xlarge) var(--border-radius-xlarge)
+    var(--border-radius-xlarge) var(--border-radius-xlarge);
+}
+
+.button {
+  display: block;
+  background-color: var(--button-background-color);
+  width: var(--button-width);
+  height: var(--button-height);
+  color: var(--button-color);
+  font-size: var(--button-font-size);
+  border: none;
+  border-radius: var(--button-radius);
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,0 +1,45 @@
+@import "../../../assets/styles/reset.scss";
+
+:host {
+    --navar-background-color: var(--purple-color-100);
+    --navbar-padding: var(--padding-small) var(--padding-base);
+    --navbar-text-color: var(--white-color);
+    --navbar-brand-font-size: var(--font-size-lg);
+}
+
+.navbar {
+    background-color: var(--navar-background-color);
+    height: 56px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    display: grid;
+    grid-template-columns: 36px 1fr 36px;
+    padding: var(--navbar-padding);
+
+    &__icon {
+        color: var(--navbar-text-color);
+    }
+
+    &__back {
+        width: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__brand {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        &-text {
+            color: var(--navbar-text-color);
+            font-size: var(--navbar-brand-font-size);
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    }
+}

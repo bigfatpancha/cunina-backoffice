@@ -1,0 +1,31 @@
+<div
+  class="text-field"
+  [ngClass]="{
+    'text-field--focused': isFocused,
+    'text-field--disabled': disabled,
+    'text-field--no-label': !label?.length
+  }"
+>
+  <label *ngIf="label" for="{{ id }}" class="text-field__floating-label">{{
+    label
+  }}</label>
+
+  <div class="text-field__container {{ _typeOfInput }}">
+    <input
+      #input
+      class="text-field__input"
+      [ngModel]="value"
+      (ngModelChange)="setValue($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      [id]="id"
+      [type]="type"
+      [disabled]="disabled"
+      [readonly]="_readonly"
+      [attr.placeholder]="placeholder ? placeholder : null"
+      [attr.pattern]="pattern"
+      [attr.maxlength]="maxlength"
+      [attr.inputmode]="inputmode"
+    />
+  </div>
+</div>

@@ -1,43 +1,52 @@
+<app-header></app-header>
+<div class="app-container">
+  <router-outlet></router-outlet>
+</div>
+<!-- <h2>Nueva Beca / Taller</h2>
 <div [formGroup]="grantForm">
-  <input type="text" formControlName="name" placeholder="nombre de la beca">
+  <app-text-field formControlName="title" placeholder="título de la beca / taller" label="título"></app-text-field>
 </div>
 <br>
 <div [formGroup]="organizationForm">
+  <h3>Organismo</h3>
   <input type="text" formControlName="name" placeholder="nombre del organismo">
   <input type="text" formControlName="link" placeholder="link del organismo">
 </div>
 <br>
 <div [formGroup]="descriptionForm">
+  <h3>Descripción</h3>
   <textarea formControlName="description" cols="30" rows="10" placeholder="descripción de la beca"></textarea>
 </div>
 <br>
-<button (click)="addRequirement()">agregar requisito</button>
 <div [formGroup]="requirementForm">
-  <input *ngFor="let req of getKeys(requirementForm.controls)" type="text" [formControlName]="req" placeholder="requisitos de la beca">
+  <h3>Requisitos</h3>
+  <textarea formControlName="requirements" cols="30" rows="10" placeholder="requisitos (uno por renglón)"></textarea>
 </div>
 <br>
-<button (click)="addSignupStep()">agregar paso para inscribirse</button>
-<div [formGroup]="signupTypeForm">
-  <select *ngFor="let sig of getKeys(signupTypeForm.controls); let i = index" [formControlName]="sig">
-    <option value="list">lista</option>
-    <option value="paragraph">parrafo</option>
-  </select>
-</div>
-<div [formGroup]="signupForm">
-  <ng-container *ngFor="let sig of getKeys(signupForm.controls); let i = index">
-    <textarea *ngIf="isParagraph(i)" [formControlName]="sig" cols="30" rows="10" placeholder="pasos para inscribirse"></textarea>
-    <div *ngIf="isList(i)" [formGroup]="getFormGroup(i)">
-      <button (click)="addListItem(i)">agregar item</button>
-      <input *ngFor="let step of getKeysSpecial(sig)" type="text" [formControlName]="step" placeholder="requisitos de la beca">
-    </div>
-  </ng-container>
-  <br>
-</div>
 <br>
 <div [formGroup]="infoForm">
-  <input type="text" formControlName="signupDate" placeholder="plazos para inscribirse">
-  <input type="text" formControlName="link" placeholder="link a la beca">
-  <input type="date" formControlName="expirationDate" placeholder="fecha de vencimiento">
+  <h3>Información</h3>
+  <textarea formControlName="when" cols="30" rows="10" placeholder="¿Cuándo se dicta?"></textarea>
+  <br>
+  <input type="text" formControlName="where" placeholder="donde se dicta?">
+  <br>
+  <input type="text" formControlName="sector" placeholder="sector del barrio">
+  <br>
+  <h3>Contacto</h3>
+  <textarea formControlName="contactPhone" cols="30" rows="10" placeholder="teléfono(s) de contacto (uno por renglón)"></textarea>
+  <br>
+  <input type="text" formControlName="contactInfo" placeholder="Detalles de contacto">
+</div>
+<br>
+<div [formGroup]="offerTypeForm">
+  <label>
+    <input type="radio" value="scholarship" formControlName="offerType">
+    <span>Beca</span>
+  </label>
+  <label>
+    <input type="radio" value="workshop" formControlName="offerType">
+    <span>Taller</span>
+  </label>
 </div>
 
-<button (click)="submit()">agregar beca</button>
+<button (click)="submit()">agregar beca</button> -->
