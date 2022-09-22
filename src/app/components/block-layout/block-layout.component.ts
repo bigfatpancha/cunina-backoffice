@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 const gutterOptions: { [key: string]: string[] } = {
   none: ['block-layout--gutter-none'],
@@ -15,6 +15,7 @@ const gutterOptions: { [key: string]: string[] } = {
   selector: 'app-block-layout',
   templateUrl: './block-layout.component.html',
   styleUrls: ['./block-layout.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BlockLayoutComponent {
   /**

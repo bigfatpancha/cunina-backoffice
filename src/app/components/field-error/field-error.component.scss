@@ -1,0 +1,9 @@
+@import "../../../assets/styles/reset.scss";
+
+:host {
+    --field-error-color: var(--pink-color-100);
+}
+
+.field-error {
+    color: var(--field-error-color);
+}

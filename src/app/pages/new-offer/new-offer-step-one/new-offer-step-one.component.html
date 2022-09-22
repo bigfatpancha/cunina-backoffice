@@ -1,22 +1,33 @@
 <app-layout-container>
-    <app-block-layout top gutter="large">
+    <app-block-layout top bottom gutter="large" [formGroup]="grantForm">
         <h2>Nueva Beca / Taller</h2>
-        <div [formGroup]="grantForm">
-            <app-text-field type="text" formControlName="title" placeholder="título de la beca / taller" label="Título"></app-text-field>
-        </div>
-        <div [formGroup]="organizationForm">
-            <app-block-layout>
-                <h3>Organismo</h3>
-                <app-text-field type="text" formControlName="name" placeholder="nombre del organismo" label="Nombre"></app-text-field>
-                <app-text-field type="text" formControlName="name" placeholder="nombre del organismo" label="Link"></app-text-field>
+        <app-block-layout>
+            <app-block-layout gutter="small">
+                <app-text-field formControlName="title" placeholder="título de la beca / taller" label="Título *"></app-text-field>
+                <app-field-error *ngIf="showTitleError">Este campo es requerido</app-field-error>
             </app-block-layout>
-        </div>
-        <div [formGroup]="descriptionForm">
-            <app-block-layout>
-                <h3>Descripción</h3>
-                <textarea formControlName="description" cols="30" rows="10" placeholder="descripción de la beca"></textarea>
+            <app-block-layout gutter="small">
+                <app-textarea formControlName="description" placeholder="descripción de la beca / taller" label="Descripción *"></app-textarea>
+                <app-field-error *ngIf="showDescriptionError">Este campo es requerido</app-field-error>
             </app-block-layout>
-        </div>
-        <app-button (click)="onClick()">SIGUIENTE</app-button>
+            <app-block-layout gutter="small">
+                <span>Tipo de oferta</span>
+                <label>
+                    <input type="radio" value="scholarship" formControlName="offerType">
+                    <span class="radio__label">Beca</span>
+                </label>
+                <label>
+                    <input type="radio" value="workshop" formControlName="offerType">
+                    <span class="radio__label">Taller</span>
+                </label>
+            </app-block-layout>
+            <h3>Organismo</h3>
+            <app-block-layout gutter="small">
+                <app-text-field formControlName="name" placeholder="nombre del organismo" label="Nombre *"></app-text-field>
+                <app-field-error *ngIf="showNameError">Este campo es requerido</app-field-error>
+            </app-block-layout>
+            <app-text-field formControlName="link" placeholder="nombre del organismo" label="Link"></app-text-field>
+        </app-block-layout>
+        <app-button [disabled]="buttonDisabled" size="small" (click)="onClick()">SIGUIENTE</app-button>
     </app-block-layout>
 </app-layout-container>

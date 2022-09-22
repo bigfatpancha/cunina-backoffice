@@ -1,0 +1,8 @@
+<app-layout-container>
+    <app-block-layout top bottom gutter="large" [formGroup]="grantForm">
+        <h2>Información de contacto</h2>
+        <app-textarea formControlName="contactPhone" placeholder="teléfono(s) de contacto (uno por renglón)" label="Teléfono"></app-textarea>
+        <app-text-field formControlName="contactInfo" placeholder="Detalles de contacto" label="Detalles"></app-text-field>
+        <app-button size="small" (click)="onClick()">GUARDAR OFERTA</app-button>
+    </app-block-layout>
+</app-layout-container>

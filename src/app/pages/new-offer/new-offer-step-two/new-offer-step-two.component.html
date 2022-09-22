@@ -1,1 +1,9 @@
-<p>new-offer-step-two works!</p>
+<app-layout-container>
+    <app-block-layout top bottom gutter="large" [formGroup]="grantForm">
+        <h2>Requisitos</h2>
+        <app-block-layout>
+            <app-textarea formControlName="requirements" placeholder="Escribir un requisito por renglón" label="Requisitos"></app-textarea>
+        </app-block-layout>
+        <app-button [disabled]="buttonDisabled" size="small" (click)="onClick()">SIGUIENTE</app-button>
+    </app-block-layout>
+</app-layout-container>

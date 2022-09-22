@@ -1,1 +1,25 @@
-<p>textarea works!</p>
+<div
+    class="textarea"
+    [ngClass]="{
+        'textarea--focused': isFocused,
+        'textarea--disabled': disabled,
+        'textarea--no-label': !label.length
+    }">
+    <label *ngIf="label" for="{{ id }}" class="textarea__floating-label">
+        {{label}}
+    </label>
+    <div class="textarea__container">
+        <textarea
+            [id]="id"
+            class="textarea__input"
+            (focus)="onFocus()"
+            (blur)="onBlur()"
+            [ngModel]="value"
+            (ngModelChange)="setValue($event)"
+            [disabled]="disabled"
+            [maxlength]="maxlength"
+            [rows]="rows"
+            [attr.placeholder]="placeholder? placeholder : null"
+        ></textarea>
+    </div>
+</div>

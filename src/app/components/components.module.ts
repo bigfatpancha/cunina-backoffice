@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { LayoutContainerComponent } from './layout-container/layout-container.component';
 import { BlockLayoutComponent } from './block-layout/block-layout.component';
+import { FieldErrorComponent } from './field-error/field-error.component';
 
 
 
@@ -18,7 +19,8 @@ import { BlockLayoutComponent } from './block-layout/block-layout.component';
     TextFieldComponent,
     TextareaComponent,
     LayoutContainerComponent,
-    BlockLayoutComponent
+    BlockLayoutComponent,
+    FieldErrorComponent
   ],
   exports: [
     ButtonComponent,
@@ -26,7 +28,9 @@ import { BlockLayoutComponent } from './block-layout/block-layout.component';
     TextFieldComponent,
     TextareaComponent,
     LayoutContainerComponent,
-    BlockLayoutComponent
+    BlockLayoutComponent,
+    FieldErrorComponent
+
   ],
   imports: [
     CommonModule,

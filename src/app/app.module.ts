@@ -16,6 +16,7 @@ import { NewOfferStepThreeComponent } from './pages/new-offer/new-offer-step-thr
 import { AppRoutingModule } from './app-routing.module';
 import { NewOfferComponent } from './pages/new-offer/new-offer.component';
 import { NewOfferStepOneComponent } from './pages/new-offer/new-offer-step-one/new-offer-step-one.component';
+import { NewOfferStepFourComponent } from './pages/new-offer/new-offer-step-four/new-offer-step-four.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NewOfferStepOneComponent } from './pages/new-offer/new-offer-step-one/n
     NewOfferStepTwoComponent,
     NewOfferStepThreeComponent,
     NewOfferComponent,
+    NewOfferStepFourComponent,
   ],
   imports: [
     BrowserModule,

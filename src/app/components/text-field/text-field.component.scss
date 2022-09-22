@@ -38,8 +38,8 @@
 
   //input error
 
-  --text-field-input-error-color: var(--pink-color-200);
-  --text-field-input-error-border-color: var(--pink-color-200);
+  --text-field-input-error-color: var(--pink-color-100);
+  --text-field-input-error-border-color: var(--pink-color-100);
   --text-field-input-error-border-radius: 4px;
 }
 .text-field {
@@ -145,9 +145,8 @@
   }
 }
 
-:host-context(text-field.ng-invalid.ng-touched) {
+:host-context(app-text-field.ng-invalid.ng-touched) {
   & > .text-field .text-field__container {
-    background-color: var(--text-field-input-error-color);
     border-radius: var(--text-field-input-error-border-radius);
     border-color: var(--text-field-input-error-border-color);
   }
@@ -157,5 +156,9 @@
     border-bottom: 2px solid var(--text-field-input-error-border-color);
     border-radius: 0;
     background-color: transparent;
+  }
+
+  & > .text-field .text-field__floating-label {
+    color: var(--text-field-input-error-border-color);
   }
 }
