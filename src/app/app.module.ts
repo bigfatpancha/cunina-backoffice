@@ -18,6 +18,8 @@ import { NewOfferComponent } from './pages/new-offer/new-offer.component';
 import { NewOfferStepOneComponent } from './pages/new-offer/new-offer-step-one/new-offer-step-one.component';
 import { NewOfferStepFourComponent } from './pages/new-offer/new-offer-step-four/new-offer-step-four.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ListComponent } from './pages/list/list.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { HomeComponent } from './pages/home/home.component';
     NewOfferComponent,
     NewOfferStepFourComponent,
     HomeComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { HomeComponent } from './pages/home/home.component';
     ComponentsModule,
     MatIconModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

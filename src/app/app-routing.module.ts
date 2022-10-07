@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ListComponent } from './pages/list/list.component';
 import { NewOfferStepFourComponent } from './pages/new-offer/new-offer-step-four/new-offer-step-four.component';
 import { NewOfferStepOneComponent } from './pages/new-offer/new-offer-step-one/new-offer-step-one.component';
 import { NewOfferStepThreeComponent } from './pages/new-offer/new-offer-step-three/new-offer-step-three.component';
@@ -34,6 +35,10 @@ const routes: Routes = [
         component: NewOfferStepFourComponent
       }
     ]
+  },
+  {
+    path: 'list',
+    component: ListComponent
   },
   {
     path: '',

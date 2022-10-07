@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { HeaderService } from 'src/app/components/services/header.service';
 import { NavigationService } from '../services/navigation.service';
 import { Offer, OffersService } from '../services/offers.service';
@@ -36,6 +36,15 @@ export class HomeComponent implements OnInit {
 
   goToNewOffer(): void {
     this.router.navigateByUrl('new-offer/step-one');
+  }
+
+  seeMore(_offerType: 'scholarships' | 'workshops'): void {
+    const extras: NavigationExtras = {
+      queryParams: {
+        offerType: _offerType
+      }
+    }
+    this.router.navigate(['list'], extras);
   }
 
 }
