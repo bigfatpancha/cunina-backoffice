@@ -1,0 +1,21 @@
+@import "../../../assets/styles/reset.scss";
+
+:host {
+    --button-background-color: var(--purple-color-100);
+    --button-color: var(--white-color);
+}
+
+.button {
+    background-color: var(--button-background-color);
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--button-background-color);
+    color: var(--button-color);
+    padding: 6px 0 0 0;
+
+    ::ng-deep .mat-icon {
+        height: 40px;
+        width: 40px;
+    }
+}

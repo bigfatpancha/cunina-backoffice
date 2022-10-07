@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { LayoutContainerComponent } from './layout-container/layout-container.component';
 import { BlockLayoutComponent } from './block-layout/block-layout.component';
 import { FieldErrorComponent } from './field-error/field-error.component';
+import { OffersCardComponent } from './offers-card/offers-card.component';
+import { ButtonIconComponent } from './button-icon/button-icon.component';
 
 
 
@@ -20,7 +22,9 @@ import { FieldErrorComponent } from './field-error/field-error.component';
     TextareaComponent,
     LayoutContainerComponent,
     BlockLayoutComponent,
-    FieldErrorComponent
+    FieldErrorComponent,
+    OffersCardComponent,
+    ButtonIconComponent
   ],
   exports: [
     ButtonComponent,
@@ -29,8 +33,9 @@ import { FieldErrorComponent } from './field-error/field-error.component';
     TextareaComponent,
     LayoutContainerComponent,
     BlockLayoutComponent,
-    FieldErrorComponent
-
+    FieldErrorComponent,
+    OffersCardComponent,
+    ButtonIconComponent
   ],
   imports: [
     CommonModule,

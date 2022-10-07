@@ -1,0 +1,66 @@
+@import "../../../assets/styles/reset.scss";
+
+:host {
+    --offers-card-width: 150px;
+    --offers-card-height: 150px;
+    --offers-card-background-color: var(--yellow-color-100);
+    --offers-card-color: var(--black-color);
+    --offers-card-font-size-title: var(--font-size-xs);
+    --offers-card-font-weight-title: var(--font-weight-bold);
+    --offers-card-font-size-description: 9px;
+    --offers-card-border-radius: 8px;
+    --offers-card-padding-top: 16px 8px 0 8px;
+    --offers-card-padding-bottom: 8px 8px 16px 8px;
+}
+
+.offers-card {
+    width: var(--offers-card-width);
+    height: var(--offers-card-height);
+    color: var(--offers-card-color);
+    background-color: var(--offers-card-background-color);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    border-radius: var(--offers-card-border-radius);
+
+    &__text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        &-description {
+            line-height: 11px;
+        }
+        &-see-more {
+            bottom: 5px;
+            position: absolute;
+            left: calc(50% - 22px);
+        }
+    }
+
+
+    &--top {
+        height: calc(var(--offers-card-height) / 2);
+        align-items: center;
+        text-align: center;
+        padding: var(--offers-card-padding-top);
+        &-see-more {
+            position: relative;
+        }
+    }
+
+    &--bottom {
+        height: calc(var(--offers-card-height) / 2);
+        align-items: center;
+        text-align: center;
+        padding: var(--offers-card-padding-bottom);
+    }
+
+    &__title {
+        font-size: var(--offers-card-font-size-title);
+        font-weight: var(--offers-card-font-weight-title);
+        line-height: 14px;
+    }
+    &__description {
+        font-size: var(--offers-card-font-size-description);
+    }
+}

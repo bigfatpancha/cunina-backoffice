@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NewOfferComponent } from './pages/new-offer/new-offer.component';
 import { NewOfferStepOneComponent } from './pages/new-offer/new-offer-step-one/new-offer-step-one.component';
 import { NewOfferStepFourComponent } from './pages/new-offer/new-offer-step-four/new-offer-step-four.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NewOfferStepFourComponent } from './pages/new-offer/new-offer-step-four
     NewOfferStepThreeComponent,
     NewOfferComponent,
     NewOfferStepFourComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

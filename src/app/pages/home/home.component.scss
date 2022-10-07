@@ -1,0 +1,17 @@
+@import "../../../assets/styles/reset.scss";
+
+:host {
+    --home-button-background-color: var(--purple-color-100);
+}
+
+.home {
+    &__card-container {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__button-container {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 100px;
+    }
+}

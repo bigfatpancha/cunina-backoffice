@@ -1,0 +1,25 @@
+<div *ngIf="!seeMore" class="offers-card">
+    <div class="offers-card--top">
+        <div class="offers-card__text">
+            <span class="offers-card__title">{{title}}</span>
+        </div>
+    </div>
+    <div class="offers-card--bottom">
+        <div class="offers-card__text offers-card__text-description">
+            <span class="offers-card__description">{{description}}</span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="seeMore" class="offers-card">
+    <div class="offers-card--top offers-card--top-see-more">
+        <div class="offers-card__text offers-card__text-see-more">
+            <span class="offers-card__title">Ver más</span>
+        </div>
+    </div>
+    <div class="offers-card--bottom">
+        <div class="offers-card__text">
+            <span class="offers-card__title">+</span>
+        </div>
+    </div>
+</div>
