@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { HeaderService } from 'src/app/components/services/header.service';
+import { Offer } from '../../model/offer.interface';
 import { NavigationService } from '../services/navigation.service';
-import { Offer, OffersService } from '../services/offers.service';
+import { OffersService } from '../services/offers.service';
 
 @Component({
   selector: 'app-home',
@@ -45,6 +46,16 @@ export class HomeComponent implements OnInit {
       }
     }
     this.router.navigate(['list'], extras);
+  }
+
+  goToDetail(_offerType: 'workshop' | 'scholarship', _id: string | undefined): void {
+    const extras: NavigationExtras = {
+      queryParams: {
+        offerType: _offerType,
+        id: _id
+      }
+    }
+    this.router.navigate(['offer'], extras);
   }
 
 }

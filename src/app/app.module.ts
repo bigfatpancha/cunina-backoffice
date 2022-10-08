@@ -20,6 +20,7 @@ import { NewOfferStepFourComponent } from './pages/new-offer/new-offer-step-four
 import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from './pages/list/list.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { DetailComponent } from './pages/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     NewOfferStepFourComponent,
     HomeComponent,
     ListComponent,
+    DetailComponent,
   ],
   imports: [
     BrowserModule,

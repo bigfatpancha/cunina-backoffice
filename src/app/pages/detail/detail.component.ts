@@ -1,20 +1,22 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from '../../components/services/header.service';
 import { Offer } from '../../model/offer.interface';
 import { NavigationService } from '../services/navigation.service';
 import { OffersService } from '../services/offers.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  selector: 'app-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListComponent implements OnInit {
-  offerType!: string;
+export class DetailComponent implements OnInit {
+
+  offerType!: 'workshop' | 'scholarship';
   title!: string;
-  offers!: Offer[];
+  id!: string;
+  offer!: Offer;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,27 +32,18 @@ export class ListComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         this.offerType = params.offerType;
-        if (this.offerType === 'workshops') {
-          this.title = 'Talleres';
-          this.offers = this.offersService.getWorkshops();
+        this.id = params.id;
+        if (this.offerType === 'workshop') {
+          this.title = 'Detalle del taller';
+          this.offer = this.offersService.getWorkshopById(this.id);
         } else {
-          this.title = 'Becas';
-          this.offers = this.offersService.getScholarships();
+          this.title = 'Detalle de la beca';
+          this.offer = this.offersService.getScholarshipById(this.id);
         }
         this.headerService.setTitle(this.title);
         this.cd.markForCheck();
       }
     );
-  }
-
-  goToDetail(_id: string | undefined): void {
-    const extras: NavigationExtras = {
-      queryParams: {
-        offerType: this.offerType,
-        id: _id
-      }
-    }
-    this.router.navigate(['offer'], extras);
   }
 
 }

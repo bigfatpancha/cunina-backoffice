@@ -2,6 +2,6 @@
 
 <mat-grid-list cols="6" gutterSize="16" rowHeight="150">
     <mat-grid-tile *ngFor="let offer of offers">
-        <app-offers-card [title]="offer.title" [description]="offer.organization"></app-offers-card>
+        <app-offers-card (click)="goToDetail(offer.id)" [title]="offer.title" [description]="offer.organization"></app-offers-card>
     </mat-grid-tile>
 </mat-grid-list>

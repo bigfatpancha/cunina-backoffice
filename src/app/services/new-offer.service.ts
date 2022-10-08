@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Contact, Offer, Organization } from '../model/offer.interface';
+import { Contact, Offer } from '../model/offer.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewOfferService {
 
+  private id!: string;
   private title!: string;
-  private organization!: Organization;
+  private organization!: string;
+  private link!: string;
   private description!: string[];
   private requirements!: string[];
   private when!: string[];
@@ -24,7 +26,8 @@ export class NewOfferService {
 
   clearAll(): void {
     this.title = '';
-    this.organization = { name: '', link: ''};
+    this.organization = '';
+    this.link= '';
     this.description = [],
     this.requirements = [],
     this.when = [];
@@ -57,10 +60,8 @@ export class NewOfferService {
   }
 
   setOrganization(_name: string, _link?: string): void {
-    this.organization = {
-      name: _name,
-      link: _link ?? ''
-    }
+    this.organization = _name;
+    this.link = _link ?? '';
   }
 
   setDescription(description: string[]): void {

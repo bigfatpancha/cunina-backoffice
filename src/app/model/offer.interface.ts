@@ -1,18 +1,16 @@
 export interface Offer {
+  id?: string;
   title: string;
-  organization: Organization;
+  organization: string;
   description: string[];
   requirements?: string[];
   when?: string[];
   where?: string;
   contact?: Contact;
   sector?: string;
-}
-
-export interface Organization {
-  name: string;
   link?: string;
 }
+
 export interface Contact {
   info?: string;
   phones?: string[];
