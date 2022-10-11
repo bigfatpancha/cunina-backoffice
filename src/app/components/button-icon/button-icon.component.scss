@@ -3,9 +3,11 @@
 :host {
     --button-background-color: var(--purple-color-100);
     --button-color: var(--white-color);
+    --button-background-color-outline: var(--white-color);
+    --button-color-outline: var(--purple-color-100);
 }
 
-.button {
+.button-icon {
     background-color: var(--button-background-color);
     height: 40px;
     width: 40px;
@@ -13,6 +15,11 @@
     border: 1px solid var(--button-background-color);
     color: var(--button-color);
     padding: 6px 0 0 0;
+
+    &--outline {
+        background-color: var(--button-background-color-outline);
+        color: var(--button-color-outline);
+    }
 
     ::ng-deep .mat-icon {
         height: 30px;

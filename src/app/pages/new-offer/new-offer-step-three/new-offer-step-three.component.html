@@ -1,10 +1,8 @@
-<app-layout-container>
-    <app-block-layout top bottom gutter="large" [formGroup]="grantForm">
-        <h2>Cuándo y dónde</h2>
-        <app-textarea formControlName="when" placeholder="¿Cuándo se dicta? (si hay más de un horario, separar por renglón)" label="Cuándo"></app-textarea>
-        <app-text-field formControlName="where" placeholder="¿Dónde se dicta?" label="Dónde"></app-text-field>
-        <app-text-field formControlName="sector" placeholder="Sector del barrio" label="Sector"></app-text-field>
-            
-        <app-button size="small" (click)="onClick()">SIGUIENTE</app-button>
-    </app-block-layout>
-</app-layout-container>
+<app-block-layout top bottom gutter="large" [formGroup]="grantForm">
+    <h2>Cuándo y dónde</h2>
+    <app-textarea formControlName="when" placeholder="¿Cuándo se dicta? (si hay más de un horario, separar por renglón)" label="Cuándo"></app-textarea>
+    <app-text-field formControlName="where" placeholder="¿Dónde se dicta?" label="Dónde"></app-text-field>
+    <app-text-field formControlName="sector" placeholder="Sector del barrio" label="Sector"></app-text-field>
+        
+    <app-button size="small" (click)="onClick()">SIGUIENTE</app-button>
+</app-block-layout>

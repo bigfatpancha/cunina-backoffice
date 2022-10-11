@@ -46,6 +46,28 @@ const routes: Routes = [
     component: DetailComponent
   },
   {
+    path: 'edit',
+    component: NewOfferComponent,
+    children: [
+      {
+        path: 'step-one',
+        component: NewOfferStepOneComponent
+      },
+      {
+        path: 'step-two',
+        component: NewOfferStepTwoComponent
+      },
+      {
+        path: 'step-three',
+        component: NewOfferStepThreeComponent
+      },
+      {
+        path: 'step-four',
+        component: NewOfferStepFourComponent
+      }
+    ]
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'

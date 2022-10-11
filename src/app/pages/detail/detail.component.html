@@ -1,2 +1,61 @@
-<h1>{{title}}</h1>
-<h2>{{offer.title}}</h2>
+<div *ngIf="!isLoading">
+    <h1>{{title}}</h1>
+    <h2>{{offer.title}}</h2>
+    <div class="detail__item">
+        <p class="detail__item-data">Organización:</p>
+        <p class="detail__item-value">{{offer.organization}}</p>
+    </div>
+    <div class="detail__item">
+        <p class="detail__item-data">Descripción:</p>
+        <div class="detail__item-container">
+            <p *ngFor="let paragraph of offer.description" class="detail__item-value">{{paragraph}}</p>
+        </div>
+    </div>
+    <div class="detail__item" *ngIf="showRequirements">
+        <p class="detail__item-data">Requisitos:</p>
+        <div class="detail__item-container">
+            <p *ngFor="let paragraph of offer.requirements" class="detail__item-value">{{paragraph}}</p>
+        </div>
+    </div>
+    <div class="detail__item" *ngIf="showWhen">
+        <p class="detail__item-data">Cuándo:</p>
+        <div class="detail__item-container">
+            <p *ngFor="let paragraph of offer.when" class="detail__item-value">{{paragraph}}</p>
+        </div>
+    </div>
+    <div class="detail__item" *ngIf="showWhere">
+        <p class="detail__item-data">Dónde:</p>
+        <p class="detail__item-value">{{offer.where}}</p>
+    </div>
+    <div class="detail__item" *ngIf="showContactInfo">
+        <p class="detail__item-data">Información de contacto:</p>
+        <p class="detail__item-value">{{offer.contact?.info}}</p>
+    </div>
+    <div class="detail__item" *ngIf="showContactPhones">
+        <p class="detail__item-data">Teléfonos de contacto:</p>
+        <div class="detail__item-container">
+            <p *ngFor="let phone of offer.contact?.phones" class="detail__item-value">{{phone}}</p>
+        </div>
+    </div>
+    <div class="detail__item" *ngIf="showSector">
+        <p class="detail__item-data">Sector:</p>
+        <p class="detail__item-value">{{offer.sector}}</p>
+    </div>
+    <div class="detail__item" *ngIf="showLink">
+        <p class="detail__item-data">Link:</p>
+        <p class="detail__item-value">{{offer.link}}</p>
+    </div>
+    <div class="detail__button-container">
+        <div class="detail__button">
+            <app-button-icon (click)="edit()" icon="edit"></app-button-icon>
+        </div>
+        <div class="detail__button">
+            <app-button-icon (click)="delete()" icon="delete" type="outline"></app-button-icon>
+        </div>
+    </div>
+</div>
+<div *ngIf="isLoading">
+    <p>
+        Cargando...
+    </p>
+</div>

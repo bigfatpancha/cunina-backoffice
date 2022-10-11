@@ -1,0 +1,24 @@
+:host {
+    --detail-item-data-font-weight: var(--font-weight-bold)
+}
+
+.detail {
+    &__item {
+        display: block;
+        padding-bottom: 16px;
+        &-data {
+            font-weight: var(--detail-item-data-font-weight);
+        }
+        &-container {
+            display: block;
+        }
+    }
+    &__button {
+        padding: 0 8px;
+    }
+    &__button-container {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 100px;
+    }
+}
