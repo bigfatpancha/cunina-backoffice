@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { HeaderService } from '../../components/services/header.service';
-import { Offer } from '../../model/offer.interface';
+import { Offer, OfferType, OfferTypesEnum } from '../../model/offer.interface';
 import { NavigationService } from '../services/navigation.service';
 import { OffersService } from '../services/offers.service';
 
@@ -12,7 +12,7 @@ import { OffersService } from '../services/offers.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent implements OnInit {
-  offerType!: string;
+  offerType!: OfferType;
   title!: string;
   offers!: Offer[];
 
@@ -30,7 +30,7 @@ export class ListComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         this.offerType = params.offerType;
-        if (this.offerType === 'workshops') {
+        if (this.offerType === OfferTypesEnum.workshop) {
           this.title = 'Talleres';
           this.offers = this.offersService.getWorkshops();
         } else {

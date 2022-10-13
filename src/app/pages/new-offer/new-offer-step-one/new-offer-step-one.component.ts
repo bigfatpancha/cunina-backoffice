@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+import { HeaderService } from 'src/app/components/services/header.service';
+import { Offer, OfferTypesEnum } from 'src/app/model/offer.interface';
 import { NewOfferService } from 'src/app/services/new-offer.service';
+import { NavigationService } from '../../services/navigation.service';
+import { OffersService } from '../../services/offers.service';
 
 @Component({
   selector: 'app-new-offer-step-one',
@@ -17,21 +21,47 @@ export class NewOfferStepOneComponent implements OnInit {
   showNameError = false;
   showTypeError = false;
   buttonDisabled = true;
+  title = 'Nueva Beca / Taller';
+  action: 'edit' | 'new' = 'new';
+  // offerId!: string;
+  offer!: Offer;
+  private isEdit = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private newOfferService: NewOfferService
+    private route: ActivatedRoute,
+    private newOfferService: NewOfferService,
+    private offersService: OffersService,
+    private headerService: HeaderService
   ) {}
 
   ngOnInit(): void {
-    this.newOfferService.clearAll();
+    this.route.queryParams
+    .subscribe(params => {
+      this.action = params.action;
+      this.isEdit = this.action === 'edit';
+      this.newOfferService.clearAll();
+      if (this.isEdit) {
+        this.title = 'Edición de beca / taller';
+        if (params.offerType === OfferTypesEnum.workshop) {
+          this.offer = this.offersService.getWorkshopById(params.offerId);
+        } else {
+          this.offer = this.offersService.getScholarshipById(params.offerId);
+        }
+      }
+      this.headerService.setTitle(this.title);
+      this.setForm();
+    })
+  }
+
+  private setForm(): void {
     this.grantForm = this.fb.group({
-      title: [null, [Validators.required]],
-      name: [null, [Validators.required]],
-      link: [null],
-      description: [null, [Validators.required]],
-      offerType: [null, [Validators.required]]
+      title: [this.isEdit ? this.offer.title : null, [Validators.required]],
+      name: [this.isEdit ? this.offer.organization : null, [Validators.required]],
+      link: [this.isEdit ? this.offer.link : null],
+      description: [this.isEdit ? this.offer.description.join('\n') : null, [Validators.required]],
+      offerType: [this.isEdit ? this.offer.type : null, [Validators.required]]
     });
 
     this.grantForm.statusChanges.pipe(
@@ -77,6 +107,7 @@ export class NewOfferStepOneComponent implements OnInit {
         this.grantForm.controls.offerType.markAsTouched();
       }
     });
+    this.buttonDisabled = this.grantForm.status !== 'VALID';
   }
 
   onClick(): void {
@@ -86,7 +117,17 @@ export class NewOfferStepOneComponent implements OnInit {
       const description = this.grantForm.controls.description?.value?.split('\n');
       this.newOfferService.setDescription(description);
       this.newOfferService.setType(this.grantForm.controls.offerType.value);
-      this.router.navigateByUrl('new-offer/step-two');
+      if (this.isEdit) {
+        const extras: NavigationExtras = {
+          queryParams: {
+            offerId: this.offer.id,
+            action: this.action
+          }
+        };
+        this.router.navigate(['new-offer/step-two'], extras);
+      } else {
+        this.router.navigateByUrl('new-offer/step-two');
+      }
     } else {
       this.grantForm.markAllAsTouched();
     }

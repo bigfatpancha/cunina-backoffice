@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Offer, OfferTypesEnum } from 'src/app/model/offer.interface';
 import { NewOfferService } from 'src/app/services/new-offer.service';
+import { OffersService } from '../../services/offers.service';
 
 @Component({
   selector: 'app-new-offer-step-two',
@@ -12,16 +14,33 @@ export class NewOfferStepTwoComponent implements OnInit {
 
   grantForm!: FormGroup;
   buttonDisabled = false;
+  action!: string;
+  isEdit = false;
+  offer!: Offer;
 
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router,
-    private newOfferService: NewOfferService
+    private newOfferService: NewOfferService,
+    private offersService: OffersService
   ) {}
 
   ngOnInit(): void {
-    this.grantForm = this.fb.group({
-      requirements: [null],
+    this.route.queryParams
+    .subscribe(params => {
+      this.action = params.action;
+      this.isEdit = this.action === 'edit';
+      if (this.isEdit) {
+        if (params.offerType === OfferTypesEnum.workshop) {
+          this.offer = this.offersService.getWorkshopById(params.offerId);
+        } else {
+          this.offer = this.offersService.getScholarshipById(params.offerId);
+        }
+      }
+      this.grantForm = this.fb.group({
+        requirements: [this.isEdit ? this.offer.requirements?.join('\n') : null],
+      });
     });
   }
 
@@ -29,7 +48,17 @@ export class NewOfferStepTwoComponent implements OnInit {
     if (this.grantForm.valid) {
       const requirements = this.grantForm.controls.requirements?.value?.split('\n');
       this.newOfferService.setRequirements(requirements);
-      this.router.navigateByUrl('new-offer/step-three');
+      if (this.isEdit) {
+        const extras: NavigationExtras = {
+          queryParams: {
+            offerId: this.offer.id,
+            action: this.action
+          }
+        };
+        this.router.navigate(['new-offer/step-three'], extras);
+      } else {
+        this.router.navigateByUrl('new-offer/step-three');
+      }
     } else {
       this.grantForm.markAllAsTouched();
     }

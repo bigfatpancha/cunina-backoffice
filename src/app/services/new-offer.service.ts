@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Contact, Offer } from '../model/offer.interface';
+import { Contact, Offer, OfferType } from '../model/offer.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +16,49 @@ export class NewOfferService {
   private where!: string;
   private contact!: Contact;
   private sector!: string;
-  private type!: 'scholarship' | 'workshop' | null;
+  private type!: OfferType;
 
   constructor() { }
 
-  getType(): 'scholarship' | 'workshop' | null {
+  setOffer(offer: Offer): void {
+    this.title = offer.title;
+    this.organization = offer.organization;
+    this.type = offer.type;
+    if (offer.id !== null && offer.id !== '' && offer.id !== undefined) {
+      this.id = offer.id;
+    }
+    if (offer.link !== undefined && offer.link !== null && offer.link !== '') {
+      this.link = offer.link
+    }
+    if (offer.description !== null && offer.description !== undefined && offer.description.length > 0) {
+      this.description = offer.description;
+    }
+    if (offer.requirements !== null && offer.requirements !== undefined && offer.requirements.length > 0) {
+      this.requirements = offer.requirements;
+    }
+    if (offer.when !== null && offer.when !== undefined && offer.when.length > 0) {
+      this.when = offer.when;
+    }
+    if (offer.where !== null && offer.where !== undefined && offer.where !== '') {
+      this.where = offer.where;
+    }
+    if (
+      (offer.contact && offer.contact.info !== undefined && offer.contact.info !== '') ||
+      (offer.contact && offer.contact.phones !== null)
+    ) {
+      this.contact = offer.contact;
+    }
+    if (offer.sector !== null && offer.sector !== undefined && offer.sector !== '') {
+      this.sector = offer.sector;
+    }
+  }
+
+  getType(): OfferType {
     return this.type;
   }
 
   clearAll(): void {
+    this.id = '';
     this.title = '';
     this.organization = '';
     this.link= '';
@@ -34,7 +68,6 @@ export class NewOfferService {
     this.where = '';
     this.contact = {phones: [], info: ''};
     this.sector = '';
-    this.type = null;
   }
 
   getOffer(): Offer {
@@ -46,12 +79,13 @@ export class NewOfferService {
       when: this.when,
       where: this.where,
       contact: this.contact,
-      sector: this.sector
+      sector: this.sector,
+      type: this.type
     }
     return offer;
   }
 
-  setType(type: 'scholarship' | 'workshop'): void {
+  setType(type: OfferType): void {
     this.type = type;
   }
 

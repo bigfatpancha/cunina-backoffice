@@ -1,3 +1,5 @@
+import { Type } from "@angular/core";
+
 export interface Offer {
   id?: string;
   title: string;
@@ -9,8 +11,15 @@ export interface Offer {
   contact?: Contact;
   sector?: string;
   link?: string;
+  type: OfferType;
 }
 
+export enum OfferTypesEnum {
+  workshop = 'workshop',
+  scholarship = 'scholarship'
+}
+
+export type OfferType = 'workshop' | 'scholarship';
 export interface Contact {
   info?: string;
   phones?: string[];

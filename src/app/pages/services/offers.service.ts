@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Offer } from '../../model/offer.interface';
+import { Offer, OfferTypesEnum } from '../../model/offer.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,7 @@ export class OffersService {
 
   workshops: Offer[] = [
     {
+      type: OfferTypesEnum.workshop,
       id: '0',
       title: 'Propuesta lúdica educativa para Niñas/os y Familias',
       organization: 'CET Centro de Educación Temprana',
@@ -29,6 +30,7 @@ export class OffersService {
       sector: 'YPF'
     },
     {
+      type: OfferTypesEnum.workshop,
       id: '1',
       title: 'Atención a Niñez y Adolescencia en Situación de Vulnerabilidad Social',
       organization: 'Dirección General de NIñez y Adolescencia - Dirección General de Adicciones',
@@ -43,6 +45,7 @@ export class OffersService {
       sector: 'San Martín'
     },
     {
+      type: OfferTypesEnum.workshop,
       id: '2',
       title: 'Apoyo escolar, todos los niveles',
       organization: 'Voces de Barro Para la Inclusion Social',
@@ -76,6 +79,7 @@ export class OffersService {
       sector: 'Playón este'
     },
     {
+      type: OfferTypesEnum.workshop,
       id: '3',
       title: 'Bachillerato Popular Ernesto Che Guevara',
       organization: 'La Poderosa',
@@ -100,6 +104,7 @@ export class OffersService {
       },
     },
     {
+      type: OfferTypesEnum.workshop,
       id: '4',
       title: 'Talleres culturales para todas las edades',
       organization: 'Somos Fuego',
@@ -124,6 +129,7 @@ export class OffersService {
       sector: 'Playón Oeste'
     },
     {
+      type: OfferTypesEnum.workshop,
       id: '5',
       title: 'Programa Adolescencia, promueve el derecho a la recreación',
       organization: 'Ministerio de Desarrollo Humano y Habitat',
@@ -136,6 +142,7 @@ export class OffersService {
       },
     },
     {
+      type: OfferTypesEnum.workshop,
       id: '6',
       title: 'Taller de periodismo',
       organization: 'Mundo Villa',
@@ -151,6 +158,7 @@ export class OffersService {
       sector: 'Playón Oeste'
     },
     {
+      type: OfferTypesEnum.workshop,
       id: '7',
       title: 'Imagen y Sonido',
       organization: 'Centro de actividades Juveniles',
@@ -165,6 +173,7 @@ export class OffersService {
       sector: 'Cristo Obrero'
     },
     {
+      type: OfferTypesEnum.workshop,
       id: '8',
       title: 'Telecomunicaciones',
       organization: 'Centro de actividades Juveniles',
@@ -179,6 +188,7 @@ export class OffersService {
       sector: 'Cristo Obrero'
     },
     {
+      type: OfferTypesEnum.workshop,
       id: '9',
       title: 'Terminalidad secundaria',
       organization: 'Centro de actividades Juveniles',
@@ -194,6 +204,7 @@ export class OffersService {
       sector: 'Cristo Obrero'
     },
     {
+      type: OfferTypesEnum.workshop,
       id: '10',
       title: 'FUTVAL',
       organization: 'Scholas',
@@ -279,6 +290,7 @@ export class OffersService {
   ];
   scholarships: Offer[] = [
     {
+      type: OfferTypesEnum.scholarship,
       id: '0',
       title: 'Progresar',
       organization: 'Ministerio de Educación',
@@ -295,6 +307,7 @@ export class OffersService {
       ]
     },
     {
+      type: OfferTypesEnum.scholarship,
       id: '1',
       title: 'Estudiar es Trabajar',
       organization: 'Ministerio de Desarrollo Humano y Hábitat de la Ciudad de Buenos Aires',
@@ -305,6 +318,7 @@ export class OffersService {
       requirements: ['Para aplicar a este programa es necesario residir en un hogar perteneciente a Ciudadanía Porteña, por lo tanto aplicaría solamente a jóvenes que habitan en la Ciudad de Buenos Aires hace al menos dos años y cuyos hogares se encuentran por debajo de la línea de pobreza. Además, es requisito ya estar inscripto en el sistema educativo formal.'],
     },
     {
+      type: OfferTypesEnum.scholarship,
       id: '2',
       title: 'BA Joven (Potenciate)',
       organization: 'Dirección de Políticas de Juventud del Gobierno de la Ciudad',
@@ -323,6 +337,7 @@ export class OffersService {
       sector: ''
     },
     {
+      type: OfferTypesEnum.scholarship,
       id: '3',
       title: 'Programa Aprendé Programando',
       organization: '',
@@ -341,6 +356,7 @@ export class OffersService {
       sector: ''
     },
     {
+      type: OfferTypesEnum.scholarship,
       id: '4',
       title: 'Elegí Enseñar (Ministerio de Educación)',
       organization: 'Ministerio de Educación e Innovación del Gobierno de la Ciudad de Buenos Aires',
@@ -359,6 +375,7 @@ export class OffersService {
       sector: ''
     },
     {
+      type: OfferTypesEnum.scholarship,
       id: '5',
       title: 'Carrera de enfermería',
       organization: 'Instituto Cecilia Grierson',

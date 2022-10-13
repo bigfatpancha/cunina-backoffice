@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { HeaderService } from '../../components/services/header.service';
-import { Offer } from '../../model/offer.interface';
+import { Offer, OfferType, OfferTypesEnum } from '../../model/offer.interface';
 import { NavigationService } from '../services/navigation.service';
 import { OffersService } from '../services/offers.service';
 
@@ -13,7 +13,7 @@ import { OffersService } from '../services/offers.service';
 })
 export class DetailComponent implements OnInit {
 
-  offerType!: 'workshops' | 'scholarships';
+  offerType!: OfferType;
   title!: string;
   id!: string;
   offer!: Offer;
@@ -41,7 +41,7 @@ export class DetailComponent implements OnInit {
       .subscribe(params => {
         this.offerType = params.offerType;
         this.id = params.id;
-        if (this.offerType === 'workshops') {
+        if (this.offerType === OfferTypesEnum.workshop) {
           this.title = 'Detalle del taller';
           this.offer = this.offersService.getWorkshopById(this.id);
         } else {
@@ -63,7 +63,14 @@ export class DetailComponent implements OnInit {
   }
 
   edit(): void {
-    this.router.navigate(['edit/step-one']);
+    const extras: NavigationExtras = {
+      queryParams: {
+        action: 'edit',
+        offerId: this.id,
+        offerType: this.offerType
+      }
+    }
+    this.router.navigate(['edit/step-one'], extras);
   }
 
   delete(): void {
