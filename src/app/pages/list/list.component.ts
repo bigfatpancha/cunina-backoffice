@@ -32,10 +32,14 @@ export class ListComponent implements OnInit {
         this.offerType = params.offerType;
         if (this.offerType === OfferTypesEnum.workshop) {
           this.title = 'Talleres';
-          this.offers = this.offersService.getWorkshops();
+          this.offersService.getWorkshops().subscribe((offers: Offer[]) => {
+            this.offers = offers;
+          });
         } else {
           this.title = 'Becas';
-          this.offers = this.offersService.getScholarships();
+          this.offersService.getScholarships().subscribe((offers: Offer[]) => {
+            this.offers = offers;
+          });
         }
         this.headerService.setTitle(this.title);
         this.cd.markForCheck();

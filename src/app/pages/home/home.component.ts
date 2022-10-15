@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { HeaderService } from 'src/app/components/services/header.service';
 import { Offer, OfferType } from '../../model/offer.interface';
@@ -8,7 +8,8 @@ import { OffersService } from '../services/offers.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
 
@@ -19,20 +20,27 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private offersService: OffersService,
     private headerService: HeaderService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.navigationService.showBack$.next(false);
     this.headerService.setTitle('Cunina Manejo de Ofertas')
-    this.workshops = this.offersService.getWorkshops();
-    this.scholarships = this.offersService.getScholarships();
-    if (this.workshops.length > 5) {
-      this.workshops = this.workshops.slice(0, 5);
-    }
-    if (this.scholarships.length > 5) {
-      this.scholarships = this.scholarships.slice(0, 5);
-    }
+    this.offersService.getWorkshops().subscribe((offers: Offer[]) => {
+      this.workshops = offers
+      if (this.workshops.length > 5) {
+        this.workshops = this.workshops.slice(0, 5);
+      }
+      this.cd.detectChanges();
+    });
+    this.offersService.getScholarships().subscribe((offers: Offer[]) => {
+      this.scholarships = offers;
+      if (this.scholarships.length > 5) {
+        this.scholarships = this.scholarships.slice(0, 5);
+      }
+      this.cd.detectChanges();
+    })
   }
 
   goToNewOffer(): void {

@@ -1,4 +1,8 @@
-import { Type } from "@angular/core";
+
+export interface Test {
+  id: number,
+  offer: Offer
+}
 
 export interface Offer {
   id?: string;
