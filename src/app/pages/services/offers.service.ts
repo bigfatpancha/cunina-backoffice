@@ -1,10 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Offer, OfferTypesEnum } from '../../model/offer.interface';
+import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OffersService {
+
+  private dbWorkshops = 'workshops';
+  private dbScholarships = 'scholarships';
+
+  workshopsRef: AngularFireList<Offer>;
+  scholarshipsRef: AngularFireList<Offer>;
+
+  constructor(private db: AngularFireDatabase) {
+    this.workshopsRef = this.db.list(this.dbWorkshops);
+    this.scholarshipsRef = this.db.list(this.dbScholarships);
+  }
+
+  addScholarship(offer: Offer): any {
+    this.db.list(this.dbScholarships).push(offer)
+  }
+  addWorkshop(offer: Offer): any {
+    this.db.list(this.dbWorkshops).push(offer)
+  }
+
 
   workshops: Offer[] = [
     {

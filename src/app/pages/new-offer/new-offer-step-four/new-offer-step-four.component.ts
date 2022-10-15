@@ -55,13 +55,11 @@ export class NewOfferStepFourComponent implements OnInit {
       const offer = this.newOfferService.getOffer();
       const type = this.newOfferService.getType();
       if (type === OfferTypesEnum.scholarship) {
-        // TODO nueva beca
-        // this.httpClient.post(this.url + '/grants.json', this.grantForm.value).subscribe(response => console.log(response))
-
+        this.offersService.addScholarship(offer);
       } else if (type === OfferTypesEnum.workshop) {
-        // TODO nuevo taller
+        this.offersService.addWorkshop(offer);
       }
-      // this.router.navigateByUrl('new-offer/step-two');
+      this.router.navigateByUrl('home');
     } else {
       this.grantForm.markAllAsTouched();
     }

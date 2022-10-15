@@ -121,7 +121,8 @@ export class NewOfferStepOneComponent implements OnInit {
         const extras: NavigationExtras = {
           queryParams: {
             offerId: this.offer.id,
-            action: this.action
+            action: this.action,
+            offerType: this.offer.type
           }
         };
         this.router.navigate(['new-offer/step-two'], extras);

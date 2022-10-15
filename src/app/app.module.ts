@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -21,6 +19,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from './pages/list/list.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DetailComponent } from './pages/detail/detail.component';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { DetailComponent } from './pages/detail/detail.component';
     BrowserModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFireDatabaseModule,
     ReactiveFormsModule,
     ComponentsModule,
     MatIconModule,
