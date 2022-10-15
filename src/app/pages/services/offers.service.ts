@@ -322,11 +322,11 @@ export class OffersService {
   // ];
 
   getWorkshops(): Observable<Offer[]> {
-    return this.db.list(this.dbWorkshops).valueChanges().pipe(
-      map(data => {
+    return this.workshopsRef.valueChanges().pipe(
+      map((data: Offer[]) => {
       const workshops: Offer[] = [];
       for(let i = 0; i < data.length; i++) {
-        const offer: Offer = data[i] as Offer;
+        const offer: Offer = data[i];
         offer.id = i.toString();
         workshops.push(offer);
       }
@@ -336,11 +336,11 @@ export class OffersService {
   }
 
   getScholarships(): Observable<Offer[]> {
-    return this.db.list(this.dbScholarships).valueChanges().pipe(
-      map(data => {
+    return this.scholarshipsRef.valueChanges().pipe(
+      map((data: Offer[]) => {
       const scholarships: Offer[] = [];
       for(let i = 0; i < data.length; i++) {
-        const offer: Offer = data[i] as Offer;
+        const offer: Offer = data[i];
         offer.id = i.toString();
         scholarships.push(offer);
       }
