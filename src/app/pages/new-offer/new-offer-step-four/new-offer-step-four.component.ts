@@ -75,14 +75,14 @@ export class NewOfferStepFourComponent implements OnInit {
       const offer = this.newOfferService.getOffer();
       const type = this.newOfferService.getType();
       if (type === OfferTypesEnum.scholarship) {
-        if (this.isEdit) {
-          this.offersService.updateScholarship(offer);
+        if (this.isEdit && this.offer.id) {
+          this.offersService.updateScholarship(this.offer.id, offer);
         } else {
           this.offersService.addScholarship(offer);
         }
       } else if (type === OfferTypesEnum.workshop) {
-        if (this.isEdit) {
-          this.offersService.updateWorkshop(offer);
+        if (this.isEdit && this.offer.id) {
+          this.offersService.updateWorkshop(this.offer.id, offer);
         } else {
           this.offersService.addWorkshop(offer);
         }

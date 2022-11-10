@@ -17,8 +17,8 @@ export class OffersService {
 
   private dbWorkshops = 'workshops';
   private dbScholarships = 'scholarships';
-  private workshopsIdKey: OfferIdKey[] = [];
-  private scholarshipsIdKey: OfferIdKey[] = [];
+  private workshopsIdKey: Map<string, string> = new Map();
+  private scholarshipsIdKey: Map<string, string> = new Map();
 
   workshopsRef: AngularFireList<Offer>;
   scholarshipsRef: AngularFireList<Offer>;
@@ -39,11 +39,17 @@ export class OffersService {
     offer.id = `${new Date().getTime() + Math.floor(Math.random() * 100000)}`;
     this.db.list(this.dbWorkshops).push(offer);
   }
-  updateScholarship(offer: Offer): void {
-    this.db.list(this.dbScholarships).update('key', offer).then(value => console.log(value)).catch(error => console.error(error));
+  updateScholarship(id: string, offer: Offer): void {
+    const key = this.scholarshipsIdKey.get(id);
+    if (key !== undefined) {
+      this.db.list(this.dbScholarships).update(key, offer).then(value => console.log(value)).catch(error => console.error(error));
+    }
   }
-  updateWorkshop(offer: Offer): void {
-    this.db.list(this.dbWorkshops).update('key', offer);
+  updateWorkshop(id: string, offer: Offer): void {
+    const key = this.workshopsIdKey.get(id);
+    if (key !== undefined) {
+      this.db.list(this.dbWorkshops).update(key, offer).then(value => console.log(value)).catch(error => console.error(error));
+    }
   }
 
 
@@ -345,13 +351,8 @@ export class OffersService {
       this.workshops = offers;
       this.workshops$.next(this.workshops);
       this.workshopsRef.query.once('value', (snapshot) => {
-        console.log('se llama al once')
         snapshot.forEach((offerSnapshot) => {
-          console.log(offerSnapshot.val().id, offerSnapshot.key);
-          this.workshopsIdKey.push({
-            id: offerSnapshot.val().id,
-            key: offerSnapshot.key || ''
-          })
+          this.workshopsIdKey.set(offerSnapshot.val().id, offerSnapshot.key || '');
         });
       });
     })
@@ -359,13 +360,8 @@ export class OffersService {
       this.scholarships = offers;
       this.scholarships$.next(this.scholarships);
       this.scholarshipsRef.query.once('value', (snapshot) => {
-        console.log('se llama al once')
         snapshot.forEach((offerSnapshot) => {
-          console.log(offerSnapshot.val().id, offerSnapshot.key);
-          this.scholarshipsIdKey.push({
-            id: offerSnapshot.val().id,
-            key: offerSnapshot.key || ''
-          })
+          this.scholarshipsIdKey.set(offerSnapshot.val().id, offerSnapshot.key || '');
         });
       })
     })
