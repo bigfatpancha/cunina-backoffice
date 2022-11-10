@@ -1,4 +1,4 @@
-<app-block-layout top bottom gutter="large" [formGroup]="grantForm">
+<app-block-layout *ngIf="!isLoading" top bottom gutter="large" [formGroup]="grantForm">
     <h2>Cuándo y dónde</h2>
     <app-textarea formControlName="when" placeholder="¿Cuándo se dicta? (si hay más de un horario, separar por renglón)" label="Cuándo"></app-textarea>
     <app-text-field formControlName="where" placeholder="¿Dónde se dicta?" label="Dónde"></app-text-field>

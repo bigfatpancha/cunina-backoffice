@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewOfferService } from 'src/app/services/new-offer.service';
@@ -10,7 +10,8 @@ import { Offer, OfferType, OfferTypesEnum } from './../../../model/offer.interfa
 @Component({
   selector: 'app-new-offer-step-four',
   templateUrl: './new-offer-step-four.component.html',
-  styleUrls: ['./new-offer-step-four.component.scss']
+  styleUrls: ['./new-offer-step-four.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewOfferStepFourComponent implements OnInit {
   grantForm!: FormGroup;
@@ -18,6 +19,7 @@ export class NewOfferStepFourComponent implements OnInit {
   action!: string;
   isEdit!: boolean;
   offer!: Offer;
+  isLoading = true;
 
   constructor(
     private fb: FormBuilder,
@@ -25,7 +27,8 @@ export class NewOfferStepFourComponent implements OnInit {
     private router: Router,
     private newOfferService: NewOfferService,
     private httpClient: HttpClient,
-    private offersService: OffersService
+    private offersService: OffersService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -36,20 +39,33 @@ export class NewOfferStepFourComponent implements OnInit {
       if (this.isEdit) {
         if (params.offerType === OfferTypesEnum.workshop) {
           this.offersService.getWorkshopById(params.offerId).subscribe((offer: Offer) => {
-            this.offer = offer;
+            this.setFormOnEdit(offer);
           });
         } else {
           this.offersService.getScholarshipById(params.offerId).subscribe((offer: Offer) => {
-            this.offer = offer;
+            this.setFormOnEdit(offer);
           });
         }
+      } else {
+        this.grantForm = this.fb.group({
+          contactPhone: [this.isEdit ? this.offer.contact?.phones?.join('\n') : null],
+          contactInfo: [this.isEdit ? this.offer.contact?.info : null]
+        });
+        this.isLoading = false;
+        this.cd.detectChanges();
       }
-      this.grantForm = this.fb.group({
-        contactPhone: [this.isEdit ? this.offer.contact?.phones?.join('\n') : null],
-        contactInfo: [this.isEdit ? this.offer.contact?.info : null]
-      });
     });
 
+  }
+
+  private setFormOnEdit(offer: Offer): void {
+    this.offer = offer;
+    this.grantForm = this.fb.group({
+      contactPhone: [this.offer.contact?.phones?.join('\n')],
+      contactInfo: [this.offer.contact?.info]
+    });
+    this.isLoading = false;
+    this.cd.detectChanges();
   }
 
   onClick(): void {

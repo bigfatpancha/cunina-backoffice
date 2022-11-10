@@ -1,4 +1,4 @@
-<app-block-layout top bottom gutter="large" [formGroup]="grantForm">
+<app-block-layout *ngIf="!isLoading" top bottom gutter="large" [formGroup]="grantForm">
     <h2>Requisitos</h2>
     <app-block-layout>
         <app-textarea formControlName="requirements" placeholder="Escribir un requisito por renglón" label="Requisitos"></app-textarea>

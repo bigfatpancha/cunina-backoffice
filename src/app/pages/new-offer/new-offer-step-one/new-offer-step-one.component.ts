@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -11,7 +11,8 @@ import { OffersService } from '../../services/offers.service';
 @Component({
   selector: 'app-new-offer-step-one',
   templateUrl: './new-offer-step-one.component.html',
-  styleUrls: ['./new-offer-step-one.component.scss']
+  styleUrls: ['./new-offer-step-one.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewOfferStepOneComponent implements OnInit {
 
@@ -26,6 +27,7 @@ export class NewOfferStepOneComponent implements OnInit {
   // offerId!: string;
   offer!: Offer;
   private isEdit = false;
+  isLoading = true;
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +35,8 @@ export class NewOfferStepOneComponent implements OnInit {
     private route: ActivatedRoute,
     private newOfferService: NewOfferService,
     private offersService: OffersService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -47,15 +50,18 @@ export class NewOfferStepOneComponent implements OnInit {
         if (params.offerType === OfferTypesEnum.workshop) {
           this.offersService.getWorkshopById(params.offerId).subscribe((offer: Offer) => {
             this.offer = offer;
+            this.setForm();
           });
         } else {
           this.offersService.getScholarshipById(params.offerId).subscribe((offer: Offer) => {
             this.offer = offer;
+            this.setForm();
           });
         }
+      } else {
+        this.setForm();
       }
       this.headerService.setTitle(this.title);
-      this.setForm();
     })
   }
 
@@ -112,6 +118,8 @@ export class NewOfferStepOneComponent implements OnInit {
       }
     });
     this.buttonDisabled = this.grantForm.status !== 'VALID';
+    this.isLoading = false;
+    this.cd.detectChanges();
   }
 
   onClick(): void {

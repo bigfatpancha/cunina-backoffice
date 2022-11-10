@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Offer, OfferTypesEnum } from 'src/app/model/offer.interface';
@@ -8,7 +8,8 @@ import { OffersService } from '../../services/offers.service';
 @Component({
   selector: 'app-new-offer-step-two',
   templateUrl: './new-offer-step-two.component.html',
-  styleUrls: ['./new-offer-step-two.component.scss']
+  styleUrls: ['./new-offer-step-two.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewOfferStepTwoComponent implements OnInit {
 
@@ -17,13 +18,15 @@ export class NewOfferStepTwoComponent implements OnInit {
   action!: string;
   isEdit = false;
   offer!: Offer;
+  isLoading = true;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private newOfferService: NewOfferService,
-    private offersService: OffersService
+    private offersService: OffersService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -34,18 +37,30 @@ export class NewOfferStepTwoComponent implements OnInit {
       if (this.isEdit) {
         if (params.offerType === OfferTypesEnum.workshop) {
           this.offersService.getWorkshopById(params.offerId).subscribe((offer: Offer) => {
-            this.offer = offer;
+            this.setFormOnEdit(offer);
           });
         } else {
           this.offersService.getScholarshipById(params.offerId).subscribe((offer: Offer) => {
-            this.offer = offer;
+            this.setFormOnEdit(offer);
           });
         }
+      } else {
+        this.grantForm = this.fb.group({
+          requirements: [null],
+        });
+        this.isLoading = false;
+        this.cd.detectChanges();
       }
-      this.grantForm = this.fb.group({
-        requirements: [this.isEdit ? this.offer.requirements?.join('\n') : null],
-      });
     });
+  }
+
+  private setFormOnEdit(offer: Offer): void {
+    this.offer = offer;
+    this.grantForm = this.fb.group({
+      requirements: [this.offer.requirements?.join('\n')],
+    });
+    this.isLoading = false;
+    this.cd.detectChanges();
   }
 
   onClick(): void {

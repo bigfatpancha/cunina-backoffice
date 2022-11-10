@@ -27,14 +27,14 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.navigationService.showBack$.next(false);
     this.headerService.setTitle('Cunina Manejo de Ofertas')
-    this.offersService.getWorkshops().subscribe((offers: Offer[]) => {
-      this.workshops = offers
+    this.offersService.workshops$.subscribe((offers: Offer[]) => {
+      this.workshops = offers;
       if (this.workshops.length > 5) {
         this.workshops = this.workshops.slice(0, 5);
       }
       this.cd.detectChanges();
     });
-    this.offersService.getScholarships().subscribe((offers: Offer[]) => {
+    this.offersService.scholarships$.subscribe((offers: Offer[]) => {
       this.scholarships = offers;
       if (this.scholarships.length > 5) {
         this.scholarships = this.scholarships.slice(0, 5);
