@@ -45,9 +45,13 @@ export class NewOfferStepOneComponent implements OnInit {
       if (this.isEdit) {
         this.title = 'Edición de beca / taller';
         if (params.offerType === OfferTypesEnum.workshop) {
-          this.offer = this.offersService.getWorkshopById(params.offerId);
+          this.offersService.getWorkshopById(params.offerId).subscribe((offer: Offer) => {
+            this.offer = offer;
+          });
         } else {
-          this.offer = this.offersService.getScholarshipById(params.offerId);
+          this.offersService.getScholarshipById(params.offerId).subscribe((offer: Offer) => {
+            this.offer = offer;
+          });
         }
       }
       this.headerService.setTitle(this.title);

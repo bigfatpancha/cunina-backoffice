@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Offer, OfferTypesEnum, Test } from '../../model/offer.interface';
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { FirebaseOperation } from '@angular/fire/database/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,19 @@ export class OffersService {
     this.scholarshipsRef = this.db.list(this.dbScholarships);
   }
 
-  addScholarship(offer: Offer): any {
-    this.db.list(this.dbScholarships).push(offer)
+  addScholarship(offer: Offer): void {
+    offer.id = `${new Date().getTime() + Math.floor(Math.random() * 100000)}`;
+    this.db.list(this.dbScholarships).push(offer);
   }
-  addWorkshop(offer: Offer): any {
-    this.db.list(this.dbWorkshops).push(offer)
+  addWorkshop(offer: Offer): void {
+    offer.id = `${new Date().getTime() + Math.floor(Math.random() * 100000)}`;
+    this.db.list(this.dbWorkshops).push(offer);
+  }
+  updateScholarship(offer: Offer): void {
+    this.db.list(this.dbScholarships).update('key', offer);
+  }
+  updateWorkshop(offer: Offer): void {
+    this.db.list(this.dbWorkshops).update('key', offer);
   }
 
 
@@ -322,43 +331,43 @@ export class OffersService {
   // ];
 
   getWorkshops(): Observable<Offer[]> {
-    return this.workshopsRef.valueChanges().pipe(
-      map((data: Offer[]) => {
-      const workshops: Offer[] = [];
-      for(let i = 0; i < data.length; i++) {
-        const offer: Offer = data[i];
-        offer.id = i.toString();
-        workshops.push(offer);
-      }
-      this.workshops = workshops;
-      return workshops;
-    }))
+    const array = this.workshopsRef.valueChanges();
+    array.subscribe((offers: Offer[]) => {
+      this.workshops = offers;
+    })
+    return array;
   }
 
   getScholarships(): Observable<Offer[]> {
+    const array = this.scholarshipsRef.valueChanges();
+    array.subscribe((offers: Offer[]) => {
+      this.workshops = offers;
+    })
+    return array;
+  }
+
+  getWorkshopById(id: string): Observable<Offer> {
+    return this.workshopsRef.valueChanges().pipe(
+      map((offers: Offer[]) => {
+        this.workshops = offers;
+        console.log(this.workshops, id)
+        return this.getElementByIdInArray(id, this.workshops);
+      })
+    );
+  }
+
+  getScholarshipById(id: string): Observable<Offer> {
     return this.scholarshipsRef.valueChanges().pipe(
-      map((data: Offer[]) => {
-      const scholarships: Offer[] = [];
-      for(let i = 0; i < data.length; i++) {
-        const offer: Offer = data[i];
-        offer.id = i.toString();
-        scholarships.push(offer);
-      }
-      this.scholarships = scholarships;
-      return scholarships;
-    }))
-  }
-
-  getWorkshopById(id: string): Offer {
-    return this.getElementByIdInArray(id, this.workshops);
-  }
-
-  getScholarshipById(id: string): Offer {
-    return this.getElementByIdInArray(id, this.scholarships);
+      map((offers: Offer[]) => {
+        console.log(this.scholarships, id)
+        this.scholarships = offers;
+        return this.getElementByIdInArray(id, this.scholarships);
+      })
+    );
   }
 
   private getElementByIdInArray(id: string, array: Offer[]): Offer {
-    const element = array.find((element: Offer) => element.id === id);
+    const element = array.find((element: Offer) => element.id == id);
     if (element !== undefined) {
       return element;
     }

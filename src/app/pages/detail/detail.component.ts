@@ -43,23 +43,34 @@ export class DetailComponent implements OnInit {
         this.id = params.id;
         if (this.offerType === OfferTypesEnum.workshop) {
           this.title = 'Detalle del taller';
-          this.offer = this.offersService.getWorkshopById(this.id);
+          this.offersService.getWorkshopById(this.id).subscribe((offer: Offer) => {
+            this.offer = offer;
+            this.initialiceDetail();
+            this.cd.detectChanges();
+          });
         } else {
           this.title = 'Detalle de la beca';
-          this.offer = this.offersService.getScholarshipById(this.id);
+          this.offersService.getScholarshipById(this.id).subscribe((offer: Offer) => {
+            this.offer = offer;
+            this.initialiceDetail();
+            this.cd.detectChanges();
+          });
         }
         this.headerService.setTitle(this.title);
-        this.showRequirements = this.getShowRequirements();
-        this.showWhen = this.getShowWhen();
-        this.showWhere = this.getShowWhere();
-        this.showContactInfo = this.getShowContactInfo();
-        this.showContactPhones = this.getShowContactPhones();
-        this.showSector = this.getShowSector();
-        this.showLink = this.getShowLink();
-        this.isLoading = false;
-        this.cd.markForCheck();
       }
     );
+  }
+
+  private initialiceDetail(): void {
+    this.showRequirements = this.getShowRequirements();
+    this.showWhen = this.getShowWhen();
+    this.showWhere = this.getShowWhere();
+    this.showContactInfo = this.getShowContactInfo();
+    this.showContactPhones = this.getShowContactPhones();
+    this.showSector = this.getShowSector();
+    this.showLink = this.getShowLink();
+    this.isLoading = false;
+    this.cd.markForCheck();
   }
 
   edit(): void {

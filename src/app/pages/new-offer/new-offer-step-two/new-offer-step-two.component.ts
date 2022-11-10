@@ -33,9 +33,13 @@ export class NewOfferStepTwoComponent implements OnInit {
       this.isEdit = this.action === 'edit';
       if (this.isEdit) {
         if (params.offerType === OfferTypesEnum.workshop) {
-          this.offer = this.offersService.getWorkshopById(params.offerId);
+          this.offersService.getWorkshopById(params.offerId).subscribe((offer: Offer) => {
+            this.offer = offer;
+          });
         } else {
-          this.offer = this.offersService.getScholarshipById(params.offerId);
+          this.offersService.getScholarshipById(params.offerId).subscribe((offer: Offer) => {
+            this.offer = offer;
+          });
         }
       }
       this.grantForm = this.fb.group({

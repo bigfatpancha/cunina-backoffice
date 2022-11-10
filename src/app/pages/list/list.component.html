@@ -1,7 +1,9 @@
 <h1>{{title}}</h1>
 
-<mat-grid-list cols="6" gutterSize="16" rowHeight="150">
-    <mat-grid-tile *ngFor="let offer of offers">
-        <app-offers-card (click)="goToDetail(offer.id)" [title]="offer.title" [description]="offer.organization"></app-offers-card>
-    </mat-grid-tile>
-</mat-grid-list>
+<div *ngIf="!isLoading">
+    <mat-grid-list cols="5" gutterSize="16" rowHeight="150">
+        <mat-grid-tile *ngFor="let offer of offers">
+            <app-offers-card (click)="goToDetail(offer.id)" [title]="offer.title" [description]="offer.organization"></app-offers-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

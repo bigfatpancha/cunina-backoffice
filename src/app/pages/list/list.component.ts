@@ -15,6 +15,7 @@ export class ListComponent implements OnInit {
   offerType!: OfferType;
   title!: string;
   offers!: Offer[];
+  isLoading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,11 +35,15 @@ export class ListComponent implements OnInit {
           this.title = 'Talleres';
           this.offersService.getWorkshops().subscribe((offers: Offer[]) => {
             this.offers = offers;
+            this.isLoading = false;
+            this.cd.detectChanges();
           });
         } else {
           this.title = 'Becas';
           this.offersService.getScholarships().subscribe((offers: Offer[]) => {
             this.offers = offers;
+            this.isLoading = false;
+            this.cd.detectChanges();
           });
         }
         this.headerService.setTitle(this.title);
