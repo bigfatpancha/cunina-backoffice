@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { RemoveOfferModalComponent } from 'src/app/components/remove-offer-modal/remove-offer-modal.component';
+import { ModalData, RemoveOfferModalComponent } from 'src/app/components/remove-offer-modal/remove-offer-modal.component';
 import { HeaderService } from '../../components/services/header.service';
 import { Offer, OfferType, OfferTypesEnum } from '../../model/offer.interface';
 import { NavigationService } from '../services/navigation.service';
@@ -93,7 +93,13 @@ export class DetailComponent implements OnInit {
   }
 
   openDialog(): void {
-    const modalRef = this.dialog.open(RemoveOfferModalComponent, {width: '250px'});
+    const _data: ModalData = {
+      offerTitle: this.offer.title
+    }
+    const modalRef = this.dialog.open(RemoveOfferModalComponent, {
+      width: '250px',
+      data: _data
+    });
     modalRef.afterClosed().subscribe((action: string) => {
       if (action === 'delete') {
         this.delete();

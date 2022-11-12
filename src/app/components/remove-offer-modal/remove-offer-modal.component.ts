@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+export interface ModalData {
+  offerTitle: string
+}
 
 @Component({
   selector: 'app-remove-offer-modal',
@@ -8,7 +12,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class RemoveOfferModalComponent {
 
-  constructor(public dialogRef: MatDialogRef<RemoveOfferModalComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<RemoveOfferModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ModalData
+  ) {}
 
   onClick(action: string): void {
     this.dialogRef.close(action);
