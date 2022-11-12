@@ -2,12 +2,12 @@
     <h1 class="home__title">Becas Disponibles</h1>
     <div class="home__card-container">
         <app-offers-card *ngFor="let card of scholarships" [title]="card.title" [description]="card.organization" (click)="goToDetail('scholarship', card.id)"></app-offers-card>
-        <app-offers-card [seeMore]="true" (click)="seeMore('scholarship')"></app-offers-card>
+        <app-offers-card *ngIf="showSeeMoreScholarships" [seeMore]="true" (click)="seeMore('scholarship')"></app-offers-card>
     </div>
     <h1 class="home__title">Talleres Disponibles</h1>
     <div class="home__card-container">
         <app-offers-card *ngFor="let card of workshops" [title]="card.title" [description]="card.organization" (click)="goToDetail('workshop', card.id)"></app-offers-card>
-        <app-offers-card [seeMore]="true" (click)="seeMore('workshop')"></app-offers-card>
+        <app-offers-card *ngIf="showSeeMoreWorkshops" [seeMore]="true" (click)="seeMore('workshop')"></app-offers-card>
     </div>
     <div class="home__button-container">
         <app-button-icon (click)="goToNewOffer()" icon="add"></app-button-icon>
