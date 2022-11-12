@@ -17,6 +17,7 @@ export class NewOfferService {
   private contact!: Contact;
   private sector!: string;
   private type!: OfferType;
+  private filters!: string[];
 
   constructor() { }
 
@@ -51,6 +52,9 @@ export class NewOfferService {
     if (offer.sector !== null && offer.sector !== undefined && offer.sector !== '') {
       this.sector = offer.sector;
     }
+    if (offer.filters !== null && offer.filters !== undefined && offer.filters.length > 0) {
+      this.filters = offer.filters;
+    }
   }
 
   getType(): OfferType {
@@ -68,6 +72,7 @@ export class NewOfferService {
     this.where = '';
     this.contact = {phones: [], info: ''};
     this.sector = '';
+    this.filters = [];
   }
 
   getOffer(): Offer {
@@ -80,7 +85,8 @@ export class NewOfferService {
       where: this.where,
       contact: this.contact,
       sector: this.sector,
-      type: this.type
+      type: this.type,
+      filters: this.filters
     }
     return offer;
   }
@@ -123,5 +129,9 @@ export class NewOfferService {
       phones: phones ?? null,
       info: info ?? ''
     }
+  }
+
+  setFilters(filters: []): void {
+    this.filters = filters ?? null;
   }
 }

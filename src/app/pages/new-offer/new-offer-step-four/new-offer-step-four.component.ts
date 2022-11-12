@@ -50,8 +50,9 @@ export class NewOfferStepFourComponent implements OnInit {
         }
       } else {
         this.grantForm = this.fb.group({
-          contactPhone: [this.isEdit ? this.offer.contact?.phones?.join('\n') : null],
-          contactInfo: [this.isEdit ? this.offer.contact?.info : null]
+          contactPhone: [null],
+          contactInfo: [null],
+          filters: [null]
         });
         this.isLoading = false;
         this.cd.detectChanges();
@@ -64,7 +65,8 @@ export class NewOfferStepFourComponent implements OnInit {
     this.offer = offer;
     this.grantForm = this.fb.group({
       contactPhone: [this.offer.contact?.phones?.join('\n')],
-      contactInfo: [this.offer.contact?.info]
+      contactInfo: [this.offer.contact?.info],
+      filters: [this.offer.filters?.join('\n')]
     });
     this.isLoading = false;
     this.cd.detectChanges();
@@ -73,7 +75,9 @@ export class NewOfferStepFourComponent implements OnInit {
   onClick(): void {
     if (this.grantForm.valid) {
       const contactPhone = this.grantForm.controls.contactPhone?.value?.split('\n');
+      const filters = this.grantForm.controls.filters?.value?.split('\n');
       this.newOfferService.setContactInfo(contactPhone, this.grantForm.controls.contactInfo.value);
+      this.newOfferService.setFilters(filters);
       const offer = this.newOfferService.getOffer();
       const type = this.newOfferService.getType();
       if (type === OfferTypesEnum.scholarship) {

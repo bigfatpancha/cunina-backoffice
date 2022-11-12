@@ -41,6 +41,12 @@
         <p class="detail__item-data">Sector:</p>
         <p class="detail__item-value">{{offer.sector}}</p>
     </div>
+    <div class="detail__item" *ngIf="showFilters">
+        <p class="detail__item-data">Filtros:</p>
+        <div class="detail__item-container">
+            <p *ngFor="let filter of offer.filters" class="detail__item-value">{{filter}}</p>
+        </div>
+    </div>
     <div class="detail__item" *ngIf="showLink">
         <p class="detail__item-data">Link:</p>
         <p class="detail__item-value">{{offer.link}}</p>

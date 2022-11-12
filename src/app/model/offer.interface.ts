@@ -16,6 +16,7 @@ export interface Offer {
   sector?: string;
   link?: string;
   type: OfferType;
+  filters?: string[];
 }
 
 export enum OfferTypesEnum {

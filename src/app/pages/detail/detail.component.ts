@@ -29,6 +29,7 @@ export class DetailComponent implements OnInit {
   showContactPhones = false;
   showSector = false;
   showLink = false;
+  showFilters = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -75,6 +76,7 @@ export class DetailComponent implements OnInit {
     this.showContactPhones = this.getShowContactPhones();
     this.showSector = this.getShowSector();
     this.showLink = this.getShowLink();
+    this.showFilters = this.getShowFilters();
     this.isLoading = false;
     this.cd.markForCheck();
   }
@@ -156,6 +158,11 @@ export class DetailComponent implements OnInit {
 
   private getShowLink(): boolean {
     return this.offer.link !== undefined && this.offer.link !== '';
+  }
+
+  private getShowFilters(): boolean {
+    return this.offer.filters !== undefined && this.offer.filters.length > 0 && this.offer.filters[0] !== '';
+
   }
 
 }
