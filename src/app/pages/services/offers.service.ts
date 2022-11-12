@@ -39,17 +39,33 @@ export class OffersService {
     offer.id = `${new Date().getTime() + Math.floor(Math.random() * 100000)}`;
     this.db.list(this.dbWorkshops).push(offer);
   }
-  updateScholarship(id: string, offer: Offer): void {
-    const key = this.scholarshipsIdKey.get(id);
+  updateScholarship(id: string, offer: Offer): Promise<void> {
+    const key = this.scholarshipsIdKey.get(id.toString());
     if (key !== undefined) {
-      this.db.list(this.dbScholarships).update(key, offer).then(value => console.log(value)).catch(error => console.error(error));
+      return this.db.list(this.dbScholarships).update(key, offer);
     }
+    return Promise.reject('no existe la oferta que se quiere actualizar: ' + id);
   }
-  updateWorkshop(id: string, offer: Offer): void {
-    const key = this.workshopsIdKey.get(id);
+  updateWorkshop(id: string, offer: Offer): Promise<void> {
+    const key = this.workshopsIdKey.get(id.toString());
     if (key !== undefined) {
-      this.db.list(this.dbWorkshops).update(key, offer).then(value => console.log(value)).catch(error => console.error(error));
+      return this.db.list(this.dbWorkshops).update(key, offer);
     }
+    return Promise.reject('no existe la oferta que se quiere actualizar: ' + id);
+  }
+  removeScholarship(id: string): Promise<void> {
+    const key = this.scholarshipsIdKey.get(id.toString());
+    if (key !== undefined) {
+      return this.db.list(this.dbScholarships).remove(key);
+    }
+    return Promise.reject('no existe la oferta que se quiere borrar: ' + id);
+  }
+  removeWorkshop(id: string): Promise<void> {
+    const key = this.workshopsIdKey.get(id.toString());
+    if (key !== undefined) {
+      return this.db.list(this.dbWorkshops).remove(key);
+    }
+    return Promise.reject('no existe la oferta que se quiere borrar: ' + id);
   }
 
 
@@ -352,7 +368,7 @@ export class OffersService {
       this.workshops$.next(this.workshops);
       this.workshopsRef.query.once('value', (snapshot) => {
         snapshot.forEach((offerSnapshot) => {
-          this.workshopsIdKey.set(offerSnapshot.val().id, offerSnapshot.key || '');
+          this.workshopsIdKey.set(offerSnapshot.val().id.toString(), offerSnapshot.key || '');
         });
       });
     })
@@ -361,7 +377,7 @@ export class OffersService {
       this.scholarships$.next(this.scholarships);
       this.scholarshipsRef.query.once('value', (snapshot) => {
         snapshot.forEach((offerSnapshot) => {
-          this.scholarshipsIdKey.set(offerSnapshot.val().id, offerSnapshot.key || '');
+          this.scholarshipsIdKey.set(offerSnapshot.val().id.toString(), offerSnapshot.key || '');
         });
       })
     })

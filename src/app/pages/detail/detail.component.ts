@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { RemoveOfferModalComponent } from 'src/app/components/remove-offer-modal/remove-offer-modal.component';
 import { HeaderService } from '../../components/services/header.service';
 import { Offer, OfferType, OfferTypesEnum } from '../../model/offer.interface';
 import { NavigationService } from '../services/navigation.service';
@@ -12,6 +15,7 @@ import { OffersService } from '../services/offers.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailComponent implements OnInit {
+  private readonly TOAST_DURATION = 5000;
 
   offerType!: OfferType;
   title!: string;
@@ -32,7 +36,9 @@ export class DetailComponent implements OnInit {
     private navigationService: NavigationService,
     private headerService: HeaderService,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -84,8 +90,41 @@ export class DetailComponent implements OnInit {
     this.router.navigate(['edit/step-one'], extras);
   }
 
+  openDialog(): void {
+    const modalRef = this.dialog.open(RemoveOfferModalComponent, {width: '250px'});
+    modalRef.afterClosed().subscribe((action: string) => {
+      if (action === 'delete') {
+        this.delete();
+      }
+    })
+  }
+
   delete(): void {
-    console.log('BORRAR')
+    if (this.offerType === OfferTypesEnum.workshop) {
+      this.offersService.removeWorkshop(this.id)
+        .then(() => this.thenFunction())
+        .catch((error) => this.catchFunction(error));
+    } else {
+      this.offersService.removeScholarship(this.id)
+        .then(() => this.thenFunction())
+        .catch((error) => this.catchFunction(error));
+    }
+  }
+
+  private thenFunction(): void {
+    this.router.navigate(['home']);
+    this.openSnackBar('La oferta fue borrada con éxito!')
+  }
+  private catchFunction(error: any): void {
+    this.router.navigate(['home']);
+    console.error(error);
+    this.openSnackBar('Hubo un error al borrar la oferta.')
+  }
+
+  private openSnackBar(message: string) {
+    this._snackBar.open(message, undefined, {
+      duration: this.TOAST_DURATION,
+    });
   }
 
   private getShowRequirements(): boolean {

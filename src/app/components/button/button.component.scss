@@ -21,6 +21,12 @@
   border: none;
   border-radius: var(--button-radius);
 
+  &--secondary {
+    color: var(--button-background-color);
+    background-color: white;
+    border: 1px solid var(--button-background-color);
+  }
+
   &:disabled {
     opacity: 0.5;
   }
@@ -39,5 +45,11 @@
   .button--small {
     width: 33%;
     margin: auto;
+  }
+}
+
+:host-context(.remove-offer-modal__actions) {
+  .button {
+    width: 60px;
   }
 }

@@ -1,0 +1,8 @@
+<h3 mat-dialog-title>Borrar oferta</h3>
+<div mat-dialog-content>
+  ¿Querés borrar la oferta nombre_oferta?
+</div>
+<div class="remove-offer-modal__actions" mat-dialog-actions>
+    <app-button (click)="onClick('')" type="secondary" mat-button >No</app-button>
+    <app-button (click)="onClick('delete')" mat-button cdkFocusInitial>Si</app-button>
+</div>

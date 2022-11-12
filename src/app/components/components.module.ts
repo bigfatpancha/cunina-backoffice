@@ -11,6 +11,7 @@ import { BlockLayoutComponent } from './block-layout/block-layout.component';
 import { FieldErrorComponent } from './field-error/field-error.component';
 import { OffersCardComponent } from './offers-card/offers-card.component';
 import { ButtonIconComponent } from './button-icon/button-icon.component';
+import { RemoveOfferModalComponent } from './remove-offer-modal/remove-offer-modal.component';
 
 
 
@@ -24,7 +25,8 @@ import { ButtonIconComponent } from './button-icon/button-icon.component';
     BlockLayoutComponent,
     FieldErrorComponent,
     OffersCardComponent,
-    ButtonIconComponent
+    ButtonIconComponent,
+    RemoveOfferModalComponent,
   ],
   exports: [
     ButtonComponent,

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewOfferService } from 'src/app/services/new-offer.service';
 import { environment } from 'src/environments/environment';
@@ -14,6 +15,7 @@ import { Offer, OfferType, OfferTypesEnum } from './../../../model/offer.interfa
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewOfferStepFourComponent implements OnInit {
+  private readonly TOAST_DURATION = 5000;
   grantForm!: FormGroup;
   url = environment.back_url;
   action!: string;
@@ -26,9 +28,9 @@ export class NewOfferStepFourComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private newOfferService: NewOfferService,
-    private httpClient: HttpClient,
     private offersService: OffersService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -76,7 +78,9 @@ export class NewOfferStepFourComponent implements OnInit {
       const type = this.newOfferService.getType();
       if (type === OfferTypesEnum.scholarship) {
         if (this.isEdit && this.offer.id) {
-          this.offersService.updateScholarship(this.offer.id, offer);
+          this.offersService.updateScholarship(this.offer.id, offer)
+            .then(() => this.thenFunction())
+            .catch((error: any) => this.catchFunction(error));
         } else {
           this.offersService.addScholarship(offer);
         }
@@ -91,5 +95,21 @@ export class NewOfferStepFourComponent implements OnInit {
     } else {
       this.grantForm.markAllAsTouched();
     }
+  }
+
+  private thenFunction(): void {
+    this.router.navigate(['home']);
+    this.openSnackBar('La oferta fue actualizada con éxito!')
+  }
+  private catchFunction(error: any): void {
+    this.router.navigate(['home']);
+    console.error(error);
+    this.openSnackBar('Hubo un error al actualizar la oferta.')
+  }
+
+  private openSnackBar(message: string) {
+    this._snackBar.open(message, undefined, {
+      duration: this.TOAST_DURATION,
+    });
   }
 }
