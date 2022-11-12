@@ -1,14 +1,14 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyDMVjjBjO1gOA1-HVu0Gs-TOCRWLFj9R9o",
-    authDomain: "cunina-dev.firebaseapp.com",
-    databaseURL: "https://cunina-dev-default-rtdb.firebaseio.com",
-    projectId: "cunina-dev",
-    storageBucket: "cunina-dev.appspot.com",
-    messagingSenderId: "923858165382",
-    appId: "1:923858165382:web:3a8237a26f71b1b3603b07",
-    measurementId: "G-HG2RLPJW57"
+    apiKey: 'AIzaSyCa96RBRKTdQWQ9WDWqPklcYoavgVl8_kg',
+    authDomain: 'cunina-app.firebaseapp.com',
+    databaseURL: 'https://cunina-app-default-rtdb.firebaseio.com',
+    projectId: 'cunina-app',
+    storageBucket: 'cunina-app.appspot.com',
+    messagingSenderId: '473849174283',
+    appId: '1:473849174283:web:2c8750b05584dab171aa0e',
+    measurementId: 'G-X59505DP65'
   },
   back_url: 'https://cunina-dev-default-rtdb.firebaseio.com'
 };
