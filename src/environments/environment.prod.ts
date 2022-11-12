@@ -9,5 +9,6 @@ export const environment = {
     messagingSenderId: "923858165382",
     appId: "1:923858165382:web:3a8237a26f71b1b3603b07",
     measurementId: "G-HG2RLPJW57"
-  }
+  },
+  back_url: 'https://cunina-dev-default-rtdb.firebaseio.com'
 };
