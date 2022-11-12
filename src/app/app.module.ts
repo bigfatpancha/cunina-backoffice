@@ -23,6 +23,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { LoginErrorComponent } from './pages/errors/login-error/login-error.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HomeComponent,
     ListComponent,
     DetailComponent,
+    LoginErrorComponent,
   ],
   imports: [
     BrowserModule,

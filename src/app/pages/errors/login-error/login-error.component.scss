@@ -1,0 +1,17 @@
+.login-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__body {
+        padding-bottom: 24px;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    &__code {
+        font-size: 10px;
+        color: gray;
+    }
+}

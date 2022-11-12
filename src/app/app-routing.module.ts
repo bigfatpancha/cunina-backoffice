@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DetailComponent } from './pages/detail/detail.component';
+import { LoginErrorComponent } from './pages/errors/login-error/login-error.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from './pages/list/list.component';
 import { NewOfferStepFourComponent } from './pages/new-offer/new-offer-step-four/new-offer-step-four.component';
@@ -66,6 +67,10 @@ const routes: Routes = [
         component: NewOfferStepFourComponent
       }
     ]
+  },
+  {
+    path: 'login-error',
+    component: LoginErrorComponent
   },
   {
     path: '',
