@@ -25,7 +25,7 @@
             <app-text-field formControlName="name" placeholder="nombre del organismo" label="Nombre *"></app-text-field>
             <app-field-error *ngIf="showNameError">Este campo es requerido</app-field-error>
         </app-block-layout>
-        <app-text-field formControlName="link" placeholder="nombre del organismo" label="Link"></app-text-field>
+        <app-text-field formControlName="link" placeholder="link al sitio" label="Link"></app-text-field>
     </app-block-layout>
     <app-button [disabled]="buttonDisabled" size="small" (click)="onClick()">SIGUIENTE</app-button>
 </app-block-layout>
