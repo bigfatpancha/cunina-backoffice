@@ -86,7 +86,8 @@ export class NewOfferService {
       contact: this.contact,
       sector: this.sector,
       type: this.type,
-      filters: this.filters
+      filters: this.filters,
+      link: this.link
     }
     return offer;
   }
