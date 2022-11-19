@@ -5,6 +5,7 @@
 /dist
 /tmp
 /out-tsc
+cunina-backoffice-win32-x64.rar
 # Only exists if Bazel was run
 /bazel-out
 
