@@ -9,7 +9,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "electron .",
-    "electron-build": "ng build --prod && electron ."
+    "electron-build": "ng build --prod && electron .",
+    "build:win": "electron-packager . --platform=win32",
+    "build:mac": "electron-packager . --platform=darwin"
   },
   "private": true,
   "dependencies": {
